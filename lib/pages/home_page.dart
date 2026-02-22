@@ -12,10 +12,20 @@ class HomePage extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                child: Image.asset('assets/champ.png', fit: BoxFit.cover),
+                child: Image.asset(
+                  'assets/champ.png',
+                  width: double.infinity, // Prend toute la largeur
+                  height: double.infinity, // Prend toute la hauteur du Expanded
+                  fit: BoxFit.cover,
+                ),
               ),
               Expanded(
-                child: Image.asset('assets/marche.png', fit: BoxFit.cover),
+                child: Image.asset(
+                  'assets/marche.png',
+                  width: double.infinity,
+                  height: double.infinity,
+                  fit: BoxFit.cover,
+                ),
               ),
             ],
           ),
