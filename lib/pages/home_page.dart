@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'login_page.dart';
-import 'register_producer.dart';
-import 'register_vendor.dart';
+import 'producteur/register_producer.dart';
+import 'revendeur/register_vendor.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
