@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../messagerie/messagerie_page.dart';
+import '../profil/profile_page.dart';
+import 'mes_commandes_revendeur_page.dart';
+import 'nouveaux_produits_page.dart';
+
 class VendorHomePage extends StatelessWidget {
   const VendorHomePage({super.key});
 
@@ -41,12 +46,14 @@ class VendorHomePage extends StatelessWidget {
                   _buildMenuCard(
                     context,
                     title: "Nouveaux Produits",
-                    icon: Icons
-                        .campaign_outlined, // Icône pour les annonces/campagnes
+                    icon: Icons.campaign_outlined,
                     color: Colors.redAccent,
-                    onTap: () {
-                      print("Voir les annonces de produits");
-                    },
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const NouveauxProduitsPage(),
+                      ),
+                    ),
                   ),
                   // BOUTON : MESSAGERIE
                   _buildMenuCard(
@@ -54,9 +61,26 @@ class VendorHomePage extends StatelessWidget {
                     title: "Messagerie",
                     icon: Icons.chat_bubble_outline,
                     color: Colors.blue,
-                    onTap: () {
-                      print("Ouvrir les messages");
-                    },
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => MessageriePage(
+                          myEmail: 'test@vendor.com',
+                          themeColor: const Color(0xFF1E5631),
+                          contactNames: const {
+                            'test@grossiste.com': 'Grossiste Test',
+                            'alain.tchoupo@facilitar.cm': 'Alain Tchoupo',
+                            'patricia.essomba@facilitar.cm':
+                                'Patricia Essomba',
+                            'jacques.nkolo@facilitar.cm': 'Jacques Nkolo',
+                            'christiane.kengne@facilitar.cm':
+                                'Christiane Kengne',
+                            'theodore.manga@facilitar.cm':
+                                'Théodore Manga',
+                          },
+                        ),
+                      ),
+                    ),
                   ),
                   // BOUTON : PROFIL
                   _buildMenuCard(
@@ -64,19 +88,32 @@ class VendorHomePage extends StatelessWidget {
                     title: "Mon Profil",
                     icon: Icons.person_outline,
                     color: Colors.teal,
-                    onTap: () {
-                      print("Voir mon profil");
-                    },
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const ProfilePage(
+                          email: 'test@vendor.com',
+                          defaultName: 'Revendeur Test',
+                          userType: 'Revendeur',
+                          themeColor: Color(0xFF1E5631),
+                        ),
+                      ),
+                    ),
                   ),
-                  // BOUTON : MES COMMANDES (Optionnel pour remplir la grille)
+                  // BOUTON : MES COMMANDES
                   _buildMenuCard(
                     context,
                     title: "Mes Commandes",
                     icon: Icons.shopping_bag_outlined,
                     color: Colors.orange,
-                    onTap: () {
-                      print("Voir les commandes");
-                    },
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const MesCommandesRevendeurPage(
+                          revendeurEmail: 'test@vendor.com',
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),

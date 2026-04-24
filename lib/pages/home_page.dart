@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
+import 'grossiste/login_wholesaler_page.dart';
+import 'grossiste/register_wholesaler.dart';
 import 'login_page.dart';
+import 'producteur/login_producer_page.dart';
 import 'producteur/register_producer.dart';
+import 'revendeur/login_vendor_page.dart';
 import 'revendeur/register_vendor.dart';
 
 class HomePage extends StatelessWidget {
@@ -12,26 +16,12 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          // 1. LES IMAGES DE FOND (SÉPARÉES EN HAUT ET BAS POUR LE RESPONSIVE)
-          Column(
-            children: [
-              Expanded(
-                child: Image.asset(
-                  'assets/champ.png',
-                  width: double.infinity,
-                  height: double.infinity,
-                  fit: BoxFit.cover, // Remplit tout l'espace sans déformer
-                ),
-              ),
-              Expanded(
-                child: Image.asset(
-                  'assets/marche.png',
-                  width: double.infinity,
-                  height: double.infinity,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ],
+          // 1. IMAGE DE FOND
+          Positioned.fill(
+            child: Image.asset(
+              'assets/acceuil.jpeg',
+              fit: BoxFit.cover,
+            ),
           ),
 
           // 2. LE CONTENU (TITRE ET BOUTONS)
@@ -41,7 +31,7 @@ class HomePage extends StatelessWidget {
               children: [
                 // Titre avec ombre pour la lisibilité
                 const Text(
-                  "MAMENCERISE",
+                  "FACILITAR",
                   style: TextStyle(
                     fontSize: 32,
                     color: Colors.white,
@@ -75,11 +65,11 @@ class HomePage extends StatelessWidget {
                       context,
                       label: "JE SUIS\nREVENDEUR",
                       icon: Icons.shopping_basket_outlined,
-                      color: const Color(0xFF1E5631), // Vert foncé
+                      color: const Color(0xFF1E5631),
                       onTap: () => Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const RegisterVendorPage(),
+                          builder: (context) => const LoginVendorPage(),
                         ),
                       ),
                     ),
@@ -88,35 +78,33 @@ class HomePage extends StatelessWidget {
                       context,
                       label: "JE SUIS\nPRODUCTEUR",
                       icon: Icons.agriculture,
-                      color: const Color(0xFFE67E22), // Orange
+                      color: const Color(0xFFE67E22),
                       onTap: () => Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const RegisterProducerPage(),
+                          builder: (context) => const LoginProducerPage(),
                         ),
                       ),
                     ),
                   ],
                 ),
-
-                const SizedBox(height: 40),
-
-                // Lien de connexion
-                TextButton(
-                  onPressed: () => Navigator.push(
+                const SizedBox(height: 20),
+                _buildSquareButton(
+                  context,
+                  label: "JE SUIS\nGROSSISTE",
+                  icon: Icons.warehouse,
+                  color: const Color(0xFF1A3A5C),
+                  onTap: () => Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const LoginPage()),
-                  ),
-                  child: const Text(
-                    "Déjà membre ? Se connecter",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                      decoration: TextDecoration.underline,
+                    MaterialPageRoute(
+                      builder: (context) => const LoginWholesalerPage(),
                     ),
                   ),
                 ),
+
+                const SizedBox(height: 40),
+
+              
               ],
             ),
           ),

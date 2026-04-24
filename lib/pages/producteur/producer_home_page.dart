@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../messagerie/messagerie_page.dart';
+import '../profil/profile_page.dart';
+import 'create_product_page.dart';
+import 'my_products_page.dart';
+
 class ProducerHomePage extends StatelessWidget {
   const ProducerHomePage({super.key});
 
@@ -39,9 +44,14 @@ class ProducerHomePage extends StatelessWidget {
                     title: "Créer un produit",
                     icon: Icons.add_circle_outline,
                     color: Colors.green,
-                    onTap: () {
-                      print("Aller vers Création de produit");
-                    },
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const CreateProductPage(
+                          producerEmail: 'test@prod.com',
+                        ),
+                      ),
+                    ),
                   ),
                   // BOUTON : LISTE DES PRODUITS
                   _buildMenuCard(
@@ -49,9 +59,14 @@ class ProducerHomePage extends StatelessWidget {
                     title: "Mes produits",
                     icon: Icons.inventory_2_outlined,
                     color: Colors.blue,
-                    onTap: () {
-                      print("Aller vers Liste des produits");
-                    },
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const MyProductsPage(
+                          producerEmail: 'test@prod.com',
+                        ),
+                      ),
+                    ),
                   ),
                   // BOUTON : CHAT
                   _buildMenuCard(
@@ -59,9 +74,28 @@ class ProducerHomePage extends StatelessWidget {
                     title: "Messagerie",
                     icon: Icons.chat_outlined,
                     color: Colors.orange,
-                    onTap: () {
-                      print("Aller vers le Chat");
-                    },
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => MessageriePage(
+                          myEmail: 'test@prod.com',
+                          themeColor: const Color(0xFFE67E22),
+                          contactNames: const {
+                            'alain.tchoupo@facilitar.cm':
+                                'Alain Tchoupo',
+                            'patricia.essomba@facilitar.cm':
+                                'Patricia Essomba',
+                            'jacques.nkolo@facilitar.cm':
+                                'Jacques Nkolo',
+                            'christiane.kengne@facilitar.cm':
+                                'Christiane Kengne',
+                            'theodore.manga@facilitar.cm':
+                                'Théodore Manga',
+                            'test@grossiste.com': 'Grossiste Test',
+                          },
+                        ),
+                      ),
+                    ),
                   ),
                   // BOUTON : PROFIL (Optionnel mais utile)
                   _buildMenuCard(
@@ -69,9 +103,17 @@ class ProducerHomePage extends StatelessWidget {
                     title: "Mon Profil",
                     icon: Icons.person_outline,
                     color: Colors.purple,
-                    onTap: () {
-                      print("Aller vers Profil");
-                    },
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const ProfilePage(
+                          email: 'test@prod.com',
+                          defaultName: 'Producteur Test',
+                          userType: 'Producteur',
+                          themeColor: Color(0xFFE67E22),
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),

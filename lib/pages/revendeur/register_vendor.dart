@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'login_vendor_page.dart';
+
 class RegisterVendorPage extends StatelessWidget {
   const RegisterVendorPage({super.key});
 
@@ -26,8 +28,17 @@ class RegisterVendorPage extends StatelessWidget {
 
             TextField(
               decoration: const InputDecoration(
-                labelText: 'Nom du commerce',
+                labelText: 'Nom de l\'entreprise',
                 prefixIcon: Icon(Icons.store),
+                border: OutlineInputBorder(),
+              ),
+            ),
+            const SizedBox(height: 15),
+
+            TextField(
+              decoration: const InputDecoration(
+                labelText: 'Nom de l\'entreprise',
+                prefixIcon: Icon(Icons.domain),
                 border: OutlineInputBorder(),
               ),
             ),
@@ -79,6 +90,30 @@ class RegisterVendorPage extends StatelessWidget {
                 ),
               ),
               child: const Text("Créer mon compte revendeur"),
+            ),
+
+            const SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text("Tu as déjà un compte ? "),
+                GestureDetector(
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const LoginVendorPage(),
+                    ),
+                  ),
+                  child: const Text(
+                    "Login",
+                    style: TextStyle(
+                      color: Color(0xFF1E5631),
+                      fontWeight: FontWeight.bold,
+                      decoration: TextDecoration.underline,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
