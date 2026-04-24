@@ -1,30 +1,14 @@
-import 'dart:convert';
-import 'dart:io';
+import 'storage_helper.dart';
 
 class MessagingStorageService {
-  static const String _fileName = 'messages.json';
-  static const String _dataDir =
-      '/home/mael/Dokumente/idee/flutter_application_1/data';
-
-  static Future<File> _getFile() async {
-    final dir = Directory(_dataDir);
-    if (!await dir.exists()) await dir.create(recursive: true);
-    return File('$_dataDir/$_fileName');
-  }
+  static const String _key = 'messages.json';
 
   static Future<Map<String, dynamic>> _readAll() async {
-    try {
-      final file = await _getFile();
-      if (!await file.exists()) return {'conversations': {}};
-      return jsonDecode(await file.readAsString()) as Map<String, dynamic>;
-    } catch (_) {
-      return {'conversations': {}};
-    }
+    return StorageHelper.read(_key, defaultValue: {'conversations': {}});
   }
 
   static Future<void> _writeAll(Map<String, dynamic> data) async {
-    final file = await _getFile();
-    await file.writeAsString(const JsonEncoder.withIndent('  ').convert(data));
+    await StorageHelper.write(_key, data);
   }
 
   /// Clé unique pour identifier une conversation entre deux utilisateurs

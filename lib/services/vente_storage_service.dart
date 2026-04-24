@@ -1,35 +1,14 @@
-import 'dart:convert';
-import 'dart:io';
+import 'storage_helper.dart';
 
 class VenteStorageService {
-  static const String _fileName = 'ventes.json';
-  static const String _dataDir =
-      '/home/mael/Dokumente/idee/flutter_application_1/data';
-
-  static Future<File> _getFile() async {
-    final dataDir = Directory(_dataDir);
-    if (!await dataDir.exists()) {
-      await dataDir.create(recursive: true);
-    }
-    return File('$_dataDir/$_fileName');
-  }
+  static const String _key = 'ventes.json';
 
   static Future<Map<String, dynamic>> _readAll() async {
-    try {
-      final file = await _getFile();
-      if (!await file.exists()) return {'ventes': []};
-      final content = await file.readAsString();
-      return jsonDecode(content) as Map<String, dynamic>;
-    } catch (_) {
-      return {'ventes': []};
-    }
+    return StorageHelper.read(_key, defaultValue: {'ventes': []});
   }
 
   static Future<void> _writeAll(Map<String, dynamic> data) async {
-    final file = await _getFile();
-    await file.writeAsString(
-      const JsonEncoder.withIndent('  ').convert(data),
-    );
+    await StorageHelper.write(_key, data);
   }
 
   /// Enregistre un produit mis en vente par un grossiste

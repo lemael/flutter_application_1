@@ -1,38 +1,14 @@
-import 'dart:convert';
-import 'dart:io';
+import 'storage_helper.dart';
 
 class ProductStorageService {
-  static const String _fileName = 'products.json';
-  static const String _dataDir =
-      '/home/mael/Dokumente/idee/flutter_application_1/data';
+  static const String _key = 'products.json';
 
-  // Retourne le fichier JSON dans le dossier "data" du projet
-  static Future<File> _getFile() async {
-    final dataDir = Directory(_dataDir);
-    if (!await dataDir.exists()) {
-      await dataDir.create(recursive: true);
-    }
-    return File('$_dataDir/$_fileName');
-  }
-
-  // Lit toutes les données
   static Future<Map<String, dynamic>> _readAll() async {
-    try {
-      final file = await _getFile();
-      if (!await file.exists()) return {};
-      final content = await file.readAsString();
-      return jsonDecode(content) as Map<String, dynamic>;
-    } catch (_) {
-      return {};
-    }
+    return StorageHelper.read(_key, defaultValue: {});
   }
 
-  // Écrit toutes les données
   static Future<void> _writeAll(Map<String, dynamic> data) async {
-    final file = await _getFile();
-    await file.writeAsString(
-      const JsonEncoder.withIndent('  ').convert(data),
-    );
+    await StorageHelper.write(_key, data);
   }
 
   /// Sauvegarde un produit pour un producteur donné
@@ -164,9 +140,4 @@ class ProductStorageService {
     return all;
   }
 
-  /// Retourne le chemin du fichier (utile pour debug)
-  static Future<String> getFilePath() async {
-    final file = await _getFile();
-    return file.path;
-  }
 }
